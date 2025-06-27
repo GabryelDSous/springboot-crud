@@ -1,14 +1,12 @@
 package br.com.gabyrel.endpoint;
 
 import br.com.gabyrel.error.CustomErrorType;
+import br.com.gabyrel.model.Student;
 import br.com.gabyrel.repository.StudentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("students")
@@ -28,5 +26,10 @@ public class StudentEndPoint {
         if(studentDAO.findById(id).isEmpty())
             return new ResponseEntity<>(new CustomErrorType("Student not found"),HttpStatus.NOT_FOUND);
         return new ResponseEntity<>(studentDAO.findById(id),HttpStatus.OK);
+    }
+
+    @PostMapping
+    public ResponseEntity<?> save(@RequestBody Student student){
+        return new ResponseEntity<>(studentDAO.save(student),HttpStatus.OK);
     }
 }
