@@ -32,4 +32,10 @@ public class StudentEndPoint {
     public ResponseEntity<?> save(@RequestBody Student student){
         return new ResponseEntity<>(studentDAO.save(student),HttpStatus.OK);
     }
+
+    @PutMapping
+    public ResponseEntity<?> update(@RequestBody Student student){
+        studentDAO.save(student);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
 }
