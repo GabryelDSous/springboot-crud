@@ -38,4 +38,10 @@ public class StudentEndPoint {
         studentDAO.save(student);
         return new ResponseEntity<>(HttpStatus.OK);
     }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<?> delete(@PathVariable Long id){
+        studentDAO.deleteById(id);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
 }
